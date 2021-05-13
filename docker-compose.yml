@@ -1,0 +1,24 @@
+---
+version: "2.1"
+services:
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Stockholm
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=jerry8520 #optional
+      - PASS=1539
+      - WHITELIST= #optional
+      - HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - /opt/Transmission:/config
+      - /mnt/storage/CurrentTorrents:/downloads
+      - /opt/Transmission:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
